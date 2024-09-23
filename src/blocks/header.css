@@ -1,0 +1,22 @@
+.header{
+ width:100%;
+ max-width:880px;
+ height:auto;
+}
+
+.header__title{
+  margin-left:200px;
+  margin-top:45px;
+}
+
+@media screen and (max-width:320px){
+  .header{
+    width:320px;
+    height:56px;
+  }
+
+  .header__title{
+    margin-left:1em;
+    margin-top:1em;
+  }
+}
