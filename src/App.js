@@ -20,11 +20,13 @@ const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
 const [selectedCard, setSelectedCard] = useState(null);
 const [currentUser, setCurrentUser] = useState({});
 const [cards, setCards] = useState([]);
+const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 useEffect(() => {
   api.getUserInfo()
     .then((userData) => {
       setCurrentUser(userData);
+      setIsAuthenticated(true);
     })
     .catch((err) => console.log(err));
 
@@ -97,7 +99,7 @@ const handleCardDelete = (card) => {
   } else {
     console.log('You can only delete your own cards');
   }
-}
+};
 
 const handleAddPlaceSubmit = (newCard) => {
   api.addCard(newCard)
@@ -106,12 +108,22 @@ const handleAddPlaceSubmit = (newCard) => {
       closeAllPopups();
     })
     .catch((err) => console.log(err));
+};
+
+const handleLogout = () => {
+  setIsAuthenticated(false);
+  setCurrentUser({});
+  localStorage.removeItem('jwt');
+  localStorage.removeItem('email');
+  localStorage.removeItem('password');
 }
+
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
-      <Header />
+      <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} />
       <Main 
         onEditProfile = {handleEditProfileClick}
         onAddPlace = {handleAddPlaceClick}
