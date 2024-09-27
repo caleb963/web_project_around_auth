@@ -10,6 +10,11 @@ import api from './utils/api';
 import EditProfilePopup from './components/EditProfilePopup';
 import EditAvatarPopup from './components/EditAvatarPopup';
 import AddPlacePopup from './components/AddPlacePopup'
+import Login from "./components/Login";
+import Register from "./components/Register";
+import ProtectedRoute from "./components/ProtectedRoute";
+import InfoTooltip from './components/InfoTooltip';
+import { register, login } from './utils/auth';
 
 
 function App() {
@@ -21,6 +26,8 @@ const [selectedCard, setSelectedCard] = useState(null);
 const [currentUser, setCurrentUser] = useState({});
 const [cards, setCards] = useState([]);
 const [isAuthenticated, setIsAuthenticated] = useState(false);
+const [tooltipMessage, setToolTipMessage] = useState('');
+const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
 useEffect(() => {
   api.getUserInfo()
@@ -110,6 +117,29 @@ const handleAddPlaceSubmit = (newCard) => {
     .catch((err) => console.log(err));
 };
 
+const  handleRegister = (email, password) => {
+    register(email, password).then((data) => {
+      if(data.success) {
+        setToolTipMessage('Registration succesful');
+        setIsTooltipOpen(true);
+      } else {
+        setToolTipMessage('Registration failed');
+        setIsTooltipOpen(true);
+      }
+    });
+  };
+
+  const handleLogin = (email, password) => {
+    login(email, password).then((data) => {
+      if (data.success) {
+        setIsAuthenticated(true);
+      } else {
+        setToolTipMessage('Login failed');
+        setIsTooltipOpen(true);
+      }
+    });
+  };
+
 const handleLogout = () => {
   setIsAuthenticated(false);
   setCurrentUser({});
@@ -124,6 +154,14 @@ const handleLogout = () => {
     <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
       <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} />
+      <Switch>
+        <Route path="/signup">
+          <Register onRegister={handleRegister} />
+        </Route>
+        <Route path="/signin">
+          <Login onLogin={handleLogin} />
+        </Route>
+<ProtectedRoute path="/"  isAuthenticated={isAuthenticated}>
       <Main 
         onEditProfile = {handleEditProfileClick}
         onAddPlace = {handleAddPlaceClick}
@@ -133,6 +171,8 @@ const handleLogout = () => {
         onCardLike={handleCardLike}
         onCardDelete={handleCardDelete}
       />
+      </ProtectedRoute>
+            </Switch>
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
       <Footer />
