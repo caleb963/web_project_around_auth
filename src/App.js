@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
@@ -152,6 +153,7 @@ const handleLogout = () => {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
+    <Router>
     <div className="page">
       <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} />
       <Switch>
@@ -161,18 +163,8 @@ const handleLogout = () => {
         <Route path="/signin">
           <Login onLogin={handleLogin} />
         </Route>
-<ProtectedRoute path="/"  isAuthenticated={isAuthenticated}>
-      <Main 
-        onEditProfile = {handleEditProfileClick}
-        onAddPlace = {handleAddPlaceClick}
-        onEditAvatar = {handleEditAvatarClick}
-        onCardClick = {handleCardClick}
-        cards={cards}
-        onCardLike={handleCardLike}
-        onCardDelete={handleCardDelete}
-      />
-      </ProtectedRoute>
-            </Switch>
+<ProtectedRoute path="/"  isAuthenticated={isAuthenticated} component={Main} />
+</Switch>
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
       <Footer />
@@ -198,6 +190,7 @@ const handleLogout = () => {
 
   
   </div>
+  </Router>
   </CurrentUserContext.Provider>
 );
 }

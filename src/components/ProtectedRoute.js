@@ -5,13 +5,19 @@ function ProtectedRoute({ component: Component, isAuthenticated, ...rest }) {
     return (
         <Route 
           {...rest}
-          render={(props) => 
+          render={({...props} ) => 
             isAuthenticated ? (
                 <Component {...props} />
             ) : (
-             <Redirect to  ="/signin" />
+             <Redirect to  ={{
+             pathname: "/signin",
+             state: {from: props.location }
+             }}
+             />
             )
           }
         />
     );
 }
+
+export default ProtectedRoute;
