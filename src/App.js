@@ -15,7 +15,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import InfoTooltip from './components/InfoTooltip';
-import { register, login } from './utils/auth';
+import { register, login, checkToken } from './utils/auth';
 
 
 function App() {
@@ -29,6 +29,18 @@ const [cards, setCards] = useState([]);
 const [isAuthenticated, setIsAuthenticated] = useState(false);
 const [tooltipMessage, setToolTipMessage] = useState('');
 const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+
+useEffect(() => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    checkToken(token)
+      .then((data) => {
+        setCurrentUser(data.data);
+        setIsAuthenticated(true);
+      })
+      .catch((err) => console.log(err));
+  }
+}, []);
 
 useEffect(() => {
   const token = localStorage.getItem('token');

@@ -27,6 +27,22 @@ export const login = (email, password) => {
         if (!response.ok) {
             return Promise.reject(`Error: ${response.status}`);
         }
-    return response.json()
+    return response.json();
 });
+};
+
+export const checkToken = (token) => {
+    return fetch(`${BASE_URL}/users/me`, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then((response) => {
+        if (!response.ok) {
+            return Promise.reject(`Error: ${response.status}`);
+        }
+        return response.json();
+    });
 };
