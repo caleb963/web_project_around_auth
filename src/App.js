@@ -31,6 +31,8 @@ const [tooltipMessage, setToolTipMessage] = useState('');
 const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
 useEffect(() => {
+  const token = localStorage.getItem('token');
+  if (token) {
   api.getUserInfo()
     .then((userData) => {
       setCurrentUser(userData);
@@ -45,7 +47,8 @@ api.getCards()
     setCards(cardData);
   })
   .catch((err) => console.log(err));
-}, []);
+  }
+}, [isAuthenticated]);
 console.log(cards);
 
 const handleEditAvatarClick = () => {
@@ -97,7 +100,7 @@ const handleCardLike = (card) => {
   api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
     setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
   }).catch((err) => console.log(err));
-}
+};
 
 const handleCardDelete = (card) => {
   if(card.owner._id === currentUser._id) {
@@ -127,24 +130,31 @@ const  handleRegister = (email, password) => {
         setToolTipMessage('Registration failed');
         setIsTooltipOpen(true);
       }
+    }).catch((err) => {
+      setToolTipMessage('Registration failed');
+      setIsTooltipOpen(true);
     });
   };
 
   const handleLogin = (email, password) => {
     login(email, password).then((data) => {
-      if (data.success) {
+      if (data.token) {
+        localStorage.setItem('token', data.token)
         setIsAuthenticated(true);
       } else {
         setToolTipMessage('Login failed');
         setIsTooltipOpen(true);
       }
+    }).catch((err) => {
+      setToolTipMessage('Login failed!');
+      setIsTooltipOpen(true);
     });
   };
 
 const handleLogout = () => {
   setIsAuthenticated(false);
   setCurrentUser({});
-  localStorage.removeItem('jwt');
+  localStorage.removeItem('token');
   localStorage.removeItem('email');
   localStorage.removeItem('password');
 }
@@ -183,7 +193,11 @@ const handleLogout = () => {
         onClose={closeAllPopups}
         onAddPlace={handleAddPlaceSubmit}
       />
-      
+      <InfoTooltip
+        isOpen={isTooltipOpen}
+        message={tooltipMessage}
+        onClose={() => setIsTooltipOpen(false)}
+      />
 
   
   </div>

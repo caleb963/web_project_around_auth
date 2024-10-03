@@ -5,6 +5,14 @@ class Api {
         this._token = token;
     }
 
+    _getHeaders() {
+        const token = localStorage.getItem('token');
+        return {
+            authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        };
+    }
+
     _handleResponse(res) {
         if (res.ok) {
             return res.json();
@@ -14,18 +22,13 @@ class Api {
 
     getUserInfo() {
         return fetch(`${this._adress}/v1/${this._groupId}/users/me`, {
-            headers: {
-                authorization: this._token,
-            },
-
+            headers: this._getHeaders(),
         }).then(this._handleResponse);
     }
 
     getCards() {
         return fetch(`${this._adress}/v1/${this._groupId}/cards`, {
-            headers: {
-                authorization: this._token,
-            },
+            headers: this._getHeaders(),
         }).then(this._handleResponse);
     }
 
@@ -33,18 +36,14 @@ class Api {
 changeLikeCardStatus(cardId, isLiked) {
 return fetch(`${this._adress}/v1/${this._groupId}/cards/likes/${cardId}`, {
     method: isLiked ? 'PUT' : 'DELETE',
-    headers: {
-        authorization: this._token,
-    },
+    headers: this._getHeaders(),
 }).then(this._handleResponse);
 }
 
 deleteCard(cardId) {
     return fetch(`${this._adress}/v1/${this._groupId}/cards/${cardId}`, {
         method: 'DELETE', 
-        headers: {
-            authorization: this._token,
-        },
+        headers: this._getHeaders(),
     }).then(this._handleResponse);
   }
 
@@ -52,26 +51,18 @@ deleteCard(cardId) {
 updateUserInfo(data) {
     return fetch(`${this._adress}/v1/${this._groupId}/users/me`, {
     method: 'PATCH',
-    headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json',
-    },
+    headers: this._getHeaders(),
     body: JSON.stringify({
         name: data.name,
         about: data.about,
     }),
-
-
 }).then(this._handleResponse);
 }
 
 setUserAvatar(data) {
   return fetch(`${this._adress}/v1/${this._groupId}/users/me/avatar`, {
     method: 'PATCH',
-    headers: {
-        authorization : this._token,
-        'Content-Type': 'application/json',
-    },
+    headers: this._getHeaders(),
     body: JSON.stringify({
         avatar: data.avatar,
     }),
@@ -82,10 +73,7 @@ setUserAvatar(data) {
 addCard(data) {
     return fetch(`${this._adress}/v1/${this._groupId}/cards`, {
         method: 'POST',
-        headers: {
-          authorization: this._token, 
-            'Content-Type' : 'application/json',
-        },
+        headers: this._getHeaders(),
         body: JSON.stringify({
             name: data.name,
             link: data.link,
