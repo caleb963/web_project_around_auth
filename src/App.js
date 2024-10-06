@@ -43,16 +43,13 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  const token = localStorage.getItem('token');
-  if (token) {
-  api.getUserInfo()
-    .then((userData) => {
-      setCurrentUser(userData);
-      setIsAuthenticated(true);
-    })
-    .catch((err) => console.log(err));
-
-
+  if (isAuthenticated) {
+    api.getUserInfo() 
+      .then((userData) => {
+        setCurrentUser(userData);
+      })
+      .catch((err) => console.log(err));
+  
 api.getCards()
   .then((cardData) => {
     console.log(cardData);
@@ -135,7 +132,7 @@ const handleAddPlaceSubmit = (newCard) => {
 
 const  handleRegister = (email, password) => {
     register(email, password).then((data) => {
-      if(data.success) {
+      if(data) {
         setToolTipMessage('Registration succesful');
         setIsTooltipOpen(true);
       } else {

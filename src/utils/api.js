@@ -83,7 +83,7 @@ addCard(data) {
 }
 
 const api = new Api({
-    adress: 'https://tripleten.desarrollointerno.com/',
+    adress: 'https://tripleten.desarrollointerno.com',
     groupId: 'web_es_12',
     token:  'cff91bad-a8c7-417a-948a-f02fc6d5768b',
 });
