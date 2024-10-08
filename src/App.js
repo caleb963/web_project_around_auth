@@ -164,9 +164,7 @@ const handleLogout = () => {
   setIsAuthenticated(false);
   setCurrentUser({});
   localStorage.removeItem('token');
-  localStorage.removeItem('email');
-  localStorage.removeItem('password');
-}
+};
 
 
 
@@ -179,7 +177,7 @@ const handleLogout = () => {
         <Route path="/signup" element={<Register onRegister={handleRegister} />} />
         <Route path="/signin"element={<Login onLogin={handleLogin} />} />
         
-<Route path="/" element= {<ProtectedRoute isAuthenticated={isAuthenticated} component={Main}/>}/>
+<Route path="/" element= {isAuthenticated ? <Main/> : <Navigate to="signin" />} />
 </Routes>
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
