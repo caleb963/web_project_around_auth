@@ -28,6 +28,7 @@ function Login({ onLogin }) {
               placeholder="Password"
             />
             <button className="login__button" type="submit">Login</button>
+            <a className="login__link"><p className="login__link-message">you're a member already? login here</p></a>
         </form>
     );
 }

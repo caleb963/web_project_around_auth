@@ -53,4 +53,21 @@ register__input:focus {
 
 .register__button:hover {
     background-color: #cccccc;
+
+.register__link {
+    cursor:pointer;
+}
+
+.register__link:hover {
+    text-decoration: underline;
+}
+
+.register__link-message{
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    margin-top: 20px;
+}
 }

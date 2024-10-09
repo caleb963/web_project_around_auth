@@ -50,8 +50,22 @@
     font-size:18px;
     cursor: pointer;
 
-    login__button:hover {
+ .login__button:hover {
         background-color: #cccccc;
+    }
+ .login__link {
+    cursor:pointer;
+ }
+    .login__link:hover {
+        text-decoration: underline;
+    }
+    .login__link-message{
+        color: #ffffff;
+        font-family: Inter;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 17px;
+        margin-top: 20px;
     }
 }
 

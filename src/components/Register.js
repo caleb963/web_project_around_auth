@@ -28,6 +28,7 @@ function Register({ onRegister}) {
               placeholder="Password"
             />
             <button className="register__button" type="submit">Register</button>
+            <a className="register__link"><p className="register__link-message">you're a member already? login here</p></a>
         </form>
     );
 }
