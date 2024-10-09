@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate ,redirect} from 'react-router-dom';
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
@@ -150,6 +150,7 @@ const  handleRegister = (email, password) => {
       if (data.token) {
         localStorage.setItem('token', data.token)
         setIsAuthenticated(true);
+        redirect('/');
       } else {
         setToolTipMessage('Login failed');
         setIsTooltipOpen(true);
@@ -177,7 +178,7 @@ const handleLogout = () => {
         <Route path="/signup" element={<Register onRegister={handleRegister} />} />
         <Route path="/signin"element={<Login onLogin={handleLogin} />} />
         
-<Route path="/" element= {isAuthenticated ? <Main/> : <Navigate to="signin" />} />
+<Route path="/" element= {isAuthenticated ? <Main/> : <Navigate to="/signin" />} />
 </Routes>
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
