@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import '../blocks/register.css';
+import {useNavigate}  from 'react-router-dom';
 
 function Register({ onRegister}) {
     const [email, setEmail] = useState('');
@@ -9,6 +10,8 @@ function Register({ onRegister}) {
         e.preventDefault();
         onRegister(email, password);
     };
+
+    const navigate = useNavigate();
 
     return (
         <form className="register" onSubmit={handleSubmit}>
@@ -28,7 +31,9 @@ function Register({ onRegister}) {
               placeholder="Password"
             />
             <button className="register__button" type="submit">Register</button>
-            <a className="register__link"><p className="register__link-message">you're a member already? login here</p></a>
+            <a className="register__link" onClick={() => {
+               navigate('/login');
+            }}><p className="register__link-message">you're a member already? login here</p></a>
         </form>
     );
 }
