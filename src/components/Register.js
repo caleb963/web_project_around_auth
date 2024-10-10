@@ -32,7 +32,7 @@ function Register({ onRegister}) {
             />
             <button className="register__button" type="submit">Register</button>
             <a className="register__link" onClick={() => {
-               navigate('/login');
+               navigate('/signin');
             }}><p className="register__link-message">you're a member already? login here</p></a>
         </form>
     );
