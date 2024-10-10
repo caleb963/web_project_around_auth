@@ -1,0 +1,51 @@
+.tooltip{
+    background-image:'../images/tooltip__checkmark.png';
+    display:none;
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 430px;
+    background-color: #ffffff;
+    opacity: 0.9;
+    z-index: 100;
+    justify-content: center;
+    align-items:center;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s ease;
+}
+
+.tooltip__open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.tooltip__content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  text-align:center;
+  position: relative;
+}
+
+.tooltip__message{
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.tooltip__close {
+    position: absolute;
+    top: 10PX;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.tooltip__close:hover {
+    color: #007bff;
+}
+
+
+
