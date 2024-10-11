@@ -29,6 +29,20 @@
   position: relative;
 }
 
+.tooltip__content_success {
+    background-image: url('../images/tooltip__checkmark.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100px;
+}
+
+.tooltip__content_error {
+    background-image: url('../images/tooltip__error.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100px;
+}
+
 .tooltip__message{
     margin: 0;
     font-size: 16px;

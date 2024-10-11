@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import '../blocks/login.css';
-import {useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 function Login({ onLogin }) {
     const [email, setEmail] = useState('');
@@ -11,7 +11,6 @@ function Login({ onLogin }) {
      onLogin(email, password);
     };
 
-    const navigate = useNavigate();
 
     return (
         <form className="login" onSubmit={handleSubmit}>
@@ -31,9 +30,9 @@ function Login({ onLogin }) {
               placeholder="Password"
             />
             <button className="login__button" type="submit">Login</button>
-            <a className="login__link" onClick={() => {
-                navigate('/signup');
-            }}><p className="login__link-message">you're a member already? Register here</p></a>
+            <Link to="/signup" className="login__link">
+        <p className="login__link-message">Not a member? Register here</p>
+      </Link>
         </form>
     );
 }

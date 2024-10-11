@@ -28,6 +28,7 @@ const [currentUser, setCurrentUser] = useState({});
 const [cards, setCards] = useState([]);
 const [isAuthenticated, setIsAuthenticated] = useState(false);
 const [tooltipMessage, setToolTipMessage] = useState('');
+const [tooltipType, setTooltipType] = useState('');
 const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
 useEffect(() => {
@@ -38,7 +39,10 @@ useEffect(() => {
         setCurrentUser(data.data);
         setIsAuthenticated(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        localStorage.removeItem('token');
+      });
   }
 }, []);
 
@@ -52,13 +56,11 @@ useEffect(() => {
   
 api.getCards()
   .then((cardData) => {
-    console.log(cardData);
     setCards(cardData);
   })
   .catch((err) => console.log(err));
   }
 }, [isAuthenticated]);
-console.log(cards);
 
 const handleEditAvatarClick = () => {
   setEditAvatarPopupOpen(true);
@@ -81,6 +83,7 @@ const closeAllPopups = () => {
   setAddPlacePopupOpen(false);
   setEditAvatarPopupOpen(false);
   setSelectedCard(null);
+  setIsTooltipOpen(false);
 };
 
 const handleUpdateUser =(userData) => {
@@ -134,14 +137,13 @@ const  handleRegister = (email, password) => {
     register(email, password).then((data) => {
       if(data) {
         setToolTipMessage('Registration succesful');
+        setTooltipType('success');
         setIsTooltipOpen(true);
       } else {
         setToolTipMessage('Registration failed');
+        setTooltipType('error');
         setIsTooltipOpen(true);
       }
-    }).catch((err) => {
-      setToolTipMessage('Registration failed');
-      setIsTooltipOpen(true);
     });
   };
 
@@ -150,14 +152,11 @@ const  handleRegister = (email, password) => {
       if (data.token) {
         localStorage.setItem('token', data.token)
         setIsAuthenticated(true);
-        redirect('/');
       } else {
-        setToolTipMessage('Login failed');
+        setToolTipMessage('Login failed!');
+        setTooltipType('error');
         setIsTooltipOpen(true);
       }
-    }).catch((err) => {
-      setToolTipMessage('Login failed!');
-      setIsTooltipOpen(true);
     });
   };
 
@@ -178,7 +177,7 @@ const handleLogout = () => {
         <Route path="/signup" element={<Register onRegister={handleRegister} />} />
         <Route path="/signin"element={<Login onLogin={handleLogin} />} />
         
-<Route path="/" element= {isAuthenticated ? <Main/> : <Navigate to="/signin" />} />
+<Route path="/" element= {<ProtectedRoute isAuthenticated={isAuthenticated}><Main /></ProtectedRoute>} />
 </Routes>
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
@@ -204,7 +203,8 @@ const handleLogout = () => {
       <InfoTooltip
         isOpen={isTooltipOpen}
         message={tooltipMessage}
-        onClose={() => setIsTooltipOpen(false)}
+        type={tooltipType}
+        onClose={closeAllPopups}
       />
 
   
