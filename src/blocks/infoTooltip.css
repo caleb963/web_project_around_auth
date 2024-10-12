@@ -17,6 +17,7 @@
 .tooltip__open {
     opacity: 1;
     visibility: visible;
+    display: flex;
 }
 
 .tooltip__content {
@@ -55,10 +56,11 @@
     right: 10px;
     font-size: 24px;
     cursor: pointer;
+    color: #ffffff;
 }
 
 .tooltip__close:hover {
-    color: #007bff;
+    color: #333;
 }
 
 

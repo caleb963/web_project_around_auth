@@ -1,7 +1,7 @@
 import React from 'react';
 import '../blocks/infoTooltip.css';
 
-function infoTooltip({ isOpen, onClose, message, type}) {
+function InfoTooltip({ isOpen, onClose, message, type}) {
     return (
             <div className={`tooltip ${isOpen ? 'tooltip__open' : ''}`}>
                 <div className={`tooltip__content tooltip__content_${type}`}>
@@ -12,4 +12,4 @@ function infoTooltip({ isOpen, onClose, message, type}) {
         );
 }
 
-export default infoTooltip;
+export default InfoTooltip;

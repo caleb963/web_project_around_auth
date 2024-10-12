@@ -21,27 +21,27 @@ class Api {
     }
 
     getUserInfo() {
-        return fetch(`${this._adress}/v1/${this._groupId}/users/me`, {
+        return fetch(`${this._adress}/users/me`, {
             headers: this._getHeaders(),
         }).then(this._handleResponse);
     }
 
     getCards() {
-        return fetch(`${this._adress}/v1/${this._groupId}/cards`, {
+        return fetch(`${this._adress}/cards`, {
             headers: this._getHeaders(),
         }).then(this._handleResponse);
     }
 
 
 changeLikeCardStatus(cardId, isLiked) {
-return fetch(`${this._adress}/v1/${this._groupId}/cards/likes/${cardId}`, {
+return fetch(`${this._adress}/cards/likes/${cardId}`, {
     method: isLiked ? 'PUT' : 'DELETE',
     headers: this._getHeaders(),
 }).then(this._handleResponse);
 }
 
 deleteCard(cardId) {
-    return fetch(`${this._adress}/v1/${this._groupId}/cards/${cardId}`, {
+    return fetch(`${this._adress}/cards/${cardId}`, {
         method: 'DELETE', 
         headers: this._getHeaders(),
     }).then(this._handleResponse);
@@ -49,7 +49,7 @@ deleteCard(cardId) {
 
 
 updateUserInfo(data) {
-    return fetch(`${this._adress}/v1/${this._groupId}/users/me`, {
+    return fetch(`${this._adress}/users/me`, {
     method: 'PATCH',
     headers: this._getHeaders(),
     body: JSON.stringify({
@@ -60,7 +60,7 @@ updateUserInfo(data) {
 }
 
 setUserAvatar(data) {
-  return fetch(`${this._adress}/v1/${this._groupId}/users/me/avatar`, {
+  return fetch(`${this._adress}/me/avatar`, {
     method: 'PATCH',
     headers: this._getHeaders(),
     body: JSON.stringify({
@@ -71,7 +71,7 @@ setUserAvatar(data) {
 
 
 addCard(data) {
-    return fetch(`${this._adress}/v1/${this._groupId}/cards`, {
+    return fetch(`${this._adress}/cards`, {
         method: 'POST',
         headers: this._getHeaders(),
         body: JSON.stringify({

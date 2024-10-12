@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate ,redirect} from 'react-router-dom';
+import { Routes, Route, Navigate ,redirect, useNavigate} from 'react-router-dom';
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
@@ -30,6 +30,7 @@ const [isAuthenticated, setIsAuthenticated] = useState(false);
 const [tooltipMessage, setToolTipMessage] = useState('');
 const [tooltipType, setTooltipType] = useState('');
 const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+const navigate = useNavigate();
 
 useEffect(() => {
   const token = localStorage.getItem('token');
@@ -38,6 +39,7 @@ useEffect(() => {
       .then((data) => {
         setCurrentUser(data.data);
         setIsAuthenticated(true);
+        navigate('/');
       })
       .catch((err) => {
         console.log(err);
@@ -144,7 +146,12 @@ const  handleRegister = (email, password) => {
         setTooltipType('error');
         setIsTooltipOpen(true);
       }
-    });
+    }).catch((err) => {
+      /*console.log(err.validation.body.message);*/
+      setToolTipMessage('Registration failed');
+      setTooltipType('error');
+      setIsTooltipOpen(true);
+    }); 
   };
 
   const handleLogin = (email, password) => {
@@ -152,6 +159,7 @@ const  handleRegister = (email, password) => {
       if (data.token) {
         localStorage.setItem('token', data.token)
         setIsAuthenticated(true);
+        navigate('/');
       } else {
         setToolTipMessage('Login failed!');
         setTooltipType('error');
@@ -170,14 +178,14 @@ const handleLogout = () => {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-    <Router>
+   
     <div className="page">
       <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} />
       <Routes>
         <Route path="/signup" element={<Register onRegister={handleRegister} />} />
         <Route path="/signin"element={<Login onLogin={handleLogin} />} />
         
-<Route path="/" element= {<ProtectedRoute isAuthenticated={isAuthenticated}><Main /></ProtectedRoute>} />
+<Route path="/" element= {<ProtectedRoute isAuthenticated={isAuthenticated} component={<Main />}></ProtectedRoute>} />
 </Routes>
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
@@ -209,7 +217,6 @@ const handleLogout = () => {
 
   
   </div>
-  </Router>
   </CurrentUserContext.Provider>
 );
 }
