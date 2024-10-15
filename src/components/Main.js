@@ -19,7 +19,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onC
     <div className="page">
         <div className="profile">
       <div className="profile__avatar-content" >
-        <img className="profile__avatar" src={currentUser?.avatar || ''} alt="Jacques Cousteau" style={{ backgroundImage: `url(${currentUser.avatar})`}}  />
+        <img className="profile__avatar" src={currentUser?.avatar || ''} alt="Jacques Cousteau" style={{ backgroundImage: `url(${currentUser?.avatar || ''})`}}  />
         <img className="profile__avatar-edit-icon" src={profileAvatarEditIcon} alt="Edit Avatar" onClick={onEditAvatar} />
       </div>
       <div className="profile__info">
