@@ -175,7 +175,6 @@ const handleLogout = () => {
 };
 
 
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
    
@@ -185,7 +184,7 @@ const handleLogout = () => {
         <Route path="/signup" element={<Register onRegister={handleRegister} />} />
         <Route path="/signin"element={<Login onLogin={handleLogin} />} />
         
-<Route path="/" element= {<ProtectedRoute isAuthenticated={isAuthenticated} component={<Main />}></ProtectedRoute>} />
+<Route path="/" element= {<ProtectedRoute isAuthenticated={isAuthenticated} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}  cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}  component={<Main />}></ProtectedRoute>} />
 </Routes>
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 

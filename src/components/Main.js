@@ -13,7 +13,6 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onC
     const [userDescription, setUserDescription] = useState('');
     const [userAvatar, setUserAvatar] = useState('');*/
     const currentUser = useContext(CurrentUserContext); //use the content of the CurrentUserContext
-   console.log(cards);
 
     return (
     <div className="page">
