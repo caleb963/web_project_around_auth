@@ -29,21 +29,29 @@
 }
 
 .tooltip__content_success {
-    background-image: url('../images/tooltip__checkmark.png');
     background-repeat: no-repeat;
-    background-position: bottom;
-
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: center;
+  
 }
 
 .tooltip__content_error {
-    background-image: url('../images/tooltip__error.png');
     background-repeat: no-repeat;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: center;
 }
 
 .tooltip__message{
+    width: 358px;
+    height:58px;
     margin: 0;
     font-size: 16px;
     color: #333;
+    font-family: Inter;
 }
 
 .tooltip__close {
