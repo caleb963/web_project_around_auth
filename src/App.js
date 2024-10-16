@@ -174,7 +174,6 @@ const handleLogout = () => {
   localStorage.removeItem('token');
 };
 
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
    
