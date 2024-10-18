@@ -147,7 +147,6 @@ const  handleRegister = (email, password) => {
         setIsTooltipOpen(true);
       }
     }).catch((err) => {
-      /*console.log(err.validation.body.message);*/
       setToolTipMessage('Registration failed');
       setTooltipType('error');
       setIsTooltipOpen(true);
