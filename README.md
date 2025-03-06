@@ -1,33 +1,27 @@
-# Tripleten web_project_around_auth
+# Web Project Around Auth  
 
-# Proyecto de Autenticación de Usuarios
+## 📌 Description  
+This project is a **web application** that allows users to **register, log in, and access protected content**. The application uses a **backend** to handle **user authentication and authorization**. Additionally, local storage is implemented to keep the user session active during repeated visits.  
 
-## Descripción
+## 🛠 Technologies Used  
 
-Este proyecto es una aplicación web que permite a los usuarios registrarse, iniciar sesión y acceder a contenido protegido. La aplicación utiliza un backend para manejar la autenticación y la autorización de usuarios. Además, se implementa el almacenamiento local del token de autenticación para mantener la sesión del usuario activa en visitas repetidas.
+### **Frontend:**  
+- **React**  
+- **CSS (BEM methodology)**  
+- **React Router**  
 
-## Tecnologías
+### **Backend:**  
+- **TripleTen API for user registration and authentication:**  
+  [TripleTen API](https://tripleten.desarrollointerno.com)  
 
-- **Frontend:**
-  - React
-  - CSS (BEM)
-  - React Router
+### **Tools:**  
+- **Visual Studio Code**  
+- **Fetch API**  
 
-- **Backend:**
-  - API de TripleTen para registro y autenticación: https://tripleten.desarrollointerno.com
+## 📂 Installation  
 
-- **Herramientas:**
-  - Visual Studio Code
-  - Fetch API
+To install this project, follow these steps:  
 
-## Autor
-
-- **Nombre:** Josue Caleb Manriquez Zamora 
-- **Correo Electrónico:**jcaleb1110@gmail.com 
-- **GitHub:** https://github.com/caleb963
-
-## Instalación
-
-1. Clona el repositorio:
+1. **Clone the repository:**  
    ```bash
    git clone https://github.com/caleb963/web_project_around_auth.git
