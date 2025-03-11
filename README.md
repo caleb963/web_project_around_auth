@@ -26,8 +26,8 @@ To install this project, follow these steps:
    ```bash
    git clone https://github.com/caleb963/web_project_around_auth.git
 
-   ##  Conclusion
-
+**Conclusion**
 This **Web Project Around Auth** is a robust example of how to implement a secure and user-friendly authentication system using modern technologies like **React**, **React Router**, and the **TripleTen API**. By combining a responsive frontend, clean design principles (with CSS and BEM), and efficient session management via local storage, this project demonstrates a cohesive approach to creating practical, real-world web applications.
 
-Whether you're showcasing this project as part of a portfolio or using it as a foundation for further development, it's a versatile starting point with plenty of room for customization and scaling. Congratulations on building a feature-rich application, and may it serve as a stepping stone for more advanced projects ahead! 
+Whether you're showcasing this project as part of a portfolio or using it as a foundation for further development, it's a versatile starting point with plenty of room for customization and scaling. Congratulations on building a feature-rich application, and may it serve as a stepping stone for more advanced projects ahead!
+
